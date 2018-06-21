@@ -1,9 +1,10 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1') {
+        stage('Build') {
             steps {
-                echo 'Hello world!' 
+                echo 'Assigning DNS...'
+		sh '~/testrepo/update-public-ip-dns.sh eureka3 default eureka1sts-svc3' 
             }
         }
     }
