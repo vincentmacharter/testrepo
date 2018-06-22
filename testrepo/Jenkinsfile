@@ -1,10 +1,14 @@
 pipeline {
     agent any 
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                echo 'Assigning DNS...'
-		sh '~/testrepo/update-public-ip-dns.sh eureka3 default eureka1sts-svc3' 
+                echo 'Testing Java App...'
+                sh 'cp ~/testrepo/testrepo/update-public-ip-dns.sh .'
+                sh './update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
+		sh './update-public-ip-dns.sh eureka2 eurekatest-vincent eureka2svc'
+ 		sh './update-public-ip-dns.sh eureka3 eurekatest-vincent eureka3svc'
+                echo 'Assignment complete'
             }
         }
     }
