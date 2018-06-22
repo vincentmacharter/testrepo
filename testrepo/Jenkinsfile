@@ -1,7 +1,14 @@
 pipeline {
     agent any 
     stages {
-        stage('Test') {
+	stage('Build'){
+	    steps {
+	    	echo 'Starting up eureka cluster...'
+		sh 'kubectl get nodes'
+	    }
+	}
+
+        stage('DNS Assignment') {
             steps {
                 echo 'Testing Java App...'
                 sh './update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
