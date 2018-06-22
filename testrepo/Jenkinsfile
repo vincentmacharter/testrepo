@@ -1,7 +1,13 @@
 pipeline {
     agent any 
     stages {
-
+	stage('Build'){
+	    steps {
+	    	echo 'Starting up eureka cluster...'
+		sh 'az aks get-credentials --resource-group cse-platform-test --name platform-test-eureka'
+		sh 'kubectl get nodes'
+	    }
+	}
 
         stage('DNS Assignment') {
             steps {
