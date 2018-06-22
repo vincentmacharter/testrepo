@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: eureka1-sts
+  namespace: eurekatest-vincent #cse-platform-viji
+  labels:
+    name: eureka1-sts
+spec:
+  serviceName: eureka-headless
+  selector:
+    matchLabels:
+      name: eureka1
+  replicas: 3
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      name: eureka1
+      labels:
+        name: eureka1
+    spec:
+      terminationGracePeriodSeconds: 10
+      serviceAccountName: default
+      nodeSelector:
+        app: eureka # will put the pods made into the node with the specified label key-value pair
+      containers:
+        - name: eureka1
+          image: cseplatformtest.azurecr.io/netflix/eureka:1.1.147
+          imagePullPolicy: IfNotPresent
+          tty: true
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+          env:
+            - name: LIMITS_MEMORY
+              valueFrom:
+               resourceFieldRef:
+                 resource: limits.memory
+                 divisor: 1Mi
+            - name: JAVA_OPTS
+              value: -Xmx$(LIMITS_MEMORY)m -XshowSettings:vm -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 -Deureka.region=default -Deureka.serviceUrl.default=http://eureka1sts-svc.eastus.cloudapp.azure.com:8080/eureka #http://40.117.215.48:8080/eureka/v2/,http://40.76.7.195:8080/eureka/v2/,http://40.76.1.208:8080/eureka/v2/
+      securityContext:
+        fsGroup: 1000

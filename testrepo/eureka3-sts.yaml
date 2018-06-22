@@ -1,0 +1,42 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: eureka3
+  namespace: cse-platform-viji
+  labels:
+    name: eureka3
+spec:
+  serviceName: eureka3
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      name: eureka3
+      labels:
+        name: eureka3
+    spec:
+      terminationGracePeriodSeconds: 10
+      serviceAccountName: default
+      nodeSelector:
+        nselector: testing
+      containers:
+        - name: eureka3
+          image: cseplatform.azurecr.io/netflix/eureka:1.1.147
+          imagePullPolicy: IfNotPresent
+          tty: true
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+          env:
+            - name: LIMITS_MEMORY
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.memory
+                  divisor: 1Mi
+            - name: JAVA_OPTS
+              value: -Xmx$(LIMITS_MEMORY)m -XshowSettings:vm -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 -Deureka.region=default -Deureka.serviceUrl.default=http://40.117.215.48:8080/eureka/v2/,http://40.76.7.195:8080/eureka/v2/,http://40.76.1.208:8080/eureka/v2/
+          securityContext:
+            runAsUser: 0
+      securityContext:
+        fsGroup: 1000

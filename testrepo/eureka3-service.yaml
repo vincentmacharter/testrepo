@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka3
+  namespace: eurekatest-vincent #cse-platform-viji
+spec:
+  type: LoadBalancer
+  selector:
+    statefulset.kubernetes.io/pod-name: eureka1-sts-2
+    #name: eureka3
+  ports:
+    -
+      name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
