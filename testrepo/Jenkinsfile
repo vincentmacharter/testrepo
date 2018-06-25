@@ -12,12 +12,12 @@ pipeline {
 	    }
 	}
 
-       # stage('DNS Assignment') {
-        #    steps {
-         #       echo 'Testing Java App...'
-          #      sh './update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
-           #     echo 'Assignment complete'
-            #}
-        #}
+        /*stage('DNS Assignment') {
+            steps {
+                echo 'Testing Java App...'
+                sh './update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
+                echo 'Assignment complete'
+            }
+        }*/
     }
 }
