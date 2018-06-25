@@ -4,7 +4,7 @@ pipeline {
 	stage('Build'){
 	    steps {
 	    	echo 'Starting up eureka cluster...'
-		withKubeConfig(caCertificate: '', credentialsId: 'ff218051-42b7-459c-b199-2c82c7063ee4', serverUrl: 'platform-test-eureka-ca213c38.hcp.eastus.azmk8s.io:443') {
+		withKubeConfig(caCertificate: '', credentialsId: 'ff218051-42b7-459c-b199-2c82c7063ee4', serverUrl: 'platform-test-eureka-ca213c38.hcp.eastus.azmk8s.io') {
     		    sh 'kubectl get nodes'
 		}
 
