@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Build'){
 
-            echo 'Starting up eureka cluster...'
+
             steps{
+                echo 'Starting up eureka cluster...'
                 sh 'ls -a'
             }
             /*withKubeConfig(
