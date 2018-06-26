@@ -6,14 +6,12 @@ pipeline {
 
             steps{
                 echo 'Starting up eureka cluster...'
-                sh 'ls -a'
+                sh 'pwd'
+                sh 'kubectl config --kubeconfig=config-new use-context platform-test-eureka'
+                sh 'kubectl config --kubeconfig=config-new current-context'
+                sh 'kubectl --kubeconfig=config-new get nodes'
             }
-            /*withKubeConfig(
-                credentialsId: 'ff218051-42b7-459c-b199-2c82c7063ee4',
-                serverUrl: 'platform-test-eureka-ca213c38.hcp.eastus.azmk8s.io')
-                {
-                    sh 'kubectl get nodes'
-                }*/
+
         }
 
         /*stage('DNS Assignment') {
