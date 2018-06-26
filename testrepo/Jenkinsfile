@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'Assigning DNS to k8s services...'
                 echo 'Assigning DNS to eureka1 service...'
-                sh 'testrepo/update-public-ip-dns.sh eureka3 eurekatest-vincent eureka3svc'
+                sh 'testrepo/update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
                 echo 'DNS assignment to service eureka1 complete'
 
                 echo 'Assigning DNS to eureka2 service...'
