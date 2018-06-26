@@ -41,7 +41,7 @@ fi
 
 # Get the exposed public IP from Kubernetes
 
-if ! service=$(kubectl get service ${service} --namespace ${namespace} -o=json); then
+if ! service=$(kubectl --kubeconfig=config-new get service ${service} --namespace ${namespace} -o=json); then
 	>&2 echo "FAIL: error getting Kubernetes service ${service}"
 	exit 1
 fi
