@@ -20,10 +20,20 @@ pipeline {
 
         stage('DNS Assignment') {
             steps {
-                echo 'Testing Java App...'
-                sh 'testrepo/update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
+                echo 'Assigning DNS to k8s services...'
+                echo 'Assigning DNS to eureka1 service...'
+                sh 'testrepo/update-public-ip-dns.sh eureka3 eurekatest-vincent eureka3svc'
+                echo 'DNS assignment to service eureka1 complete'
 
-                echo 'Assignment complete'
+                echo 'Assigning DNS to eureka2 service...'
+                sh 'testrepo/update-public-ip-dns.sh eureka2 eurekatest-vincent eureka2svc'
+                echo 'DNS assignment to service eureka2 complete'
+
+                echo 'Assigning DNS to eureka3 service...'
+                sh 'testrepo/update-public-ip-dns.sh eureka3 eurekatest-vincent eureka3svc'
+                echo 'DNS assignment to service eureka3 complete'
+
+                echo 'DNS Assignment complete'
             }
         }
     }
