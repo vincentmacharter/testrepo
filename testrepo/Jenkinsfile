@@ -7,10 +7,10 @@ pipeline {
                 sh 'pwd'
                 sh 'kubectl config --kubeconfig=config-new use-context platform-test-eureka'
                 sh 'kubectl config --kubeconfig=config-new current-context'
-                sh 'kubectl --kubeconfig=config-new apply -f eureka1-headless-service.yaml'
+                /*sh 'kubectl --kubeconfig=config-new apply -f eureka1-headless-service.yaml'
                 sh 'kubectl --kubeconfig=config-new apply -f eureka1-service.yaml'
                 sh 'kubectl --kubeconfig=config-new apply -f eureka2-service.yaml'
-                sh 'kubectl --kubeconfig=config-new apply -f eureka3-service.yaml'
+                sh 'kubectl --kubeconfig=config-new apply -f eureka3-service.yaml'*/
                 sh 'kubectl --kubeconfig=config-new apply -f eureka1-sts.yaml'
                 sh 'kubectl --kubeconfig=config-new apply get pods'
                 sh 'kubectl --kubeconfig=config-new apply get services'
