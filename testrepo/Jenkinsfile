@@ -7,13 +7,13 @@ pipeline {
                 sh 'pwd'
                 sh 'kubectl config --kubeconfig=config-new use-context platform-test-eureka'
                 sh 'kubectl config --kubeconfig=config-new current-context'
-                /*sh 'kubectl --kubeconfig=config-new apply -f testrepo/eureka1-headless-service.yaml'
+                sh 'kubectl --kubeconfig=config-new apply -f testrepo/eureka1-headless-service.yaml'
                 sh 'kubectl --kubeconfig=config-new apply -f testrepo/eureka1-service.yaml'
                 sh 'kubectl --kubeconfig=config-new apply -f testrepo/eureka2-service.yaml'
-                sh 'kubectl --kubeconfig=config-new apply -f testrepo/eureka3-service.yaml'*/
+                sh 'kubectl --kubeconfig=config-new apply -f testrepo/eureka3-service.yaml'
                 sh 'kubectl --kubeconfig=config-new apply -f testrepo/eureka1-sts.yaml'
-                sh 'kubectl --kubeconfig=config-new apply get pods'
-                sh 'kubectl --kubeconfig=config-new apply get services'
+                sh 'kubectl --kubeconfig=config-new -n eurekatest-vincent get pods'
+                sh 'kubectl --kubeconfig=config-new -n eurekatest-vincent get services'
             }
 
         }
@@ -21,7 +21,7 @@ pipeline {
         /*stage('DNS Assignment') {
             steps {
                 echo 'Testing Java App...'
-                sh './update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
+                sh 'testrepo/update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
 
                 echo 'Assignment complete'
             }
