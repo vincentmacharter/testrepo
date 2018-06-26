@@ -18,13 +18,13 @@ pipeline {
 
         }
 
-        /*stage('DNS Assignment') {
+        stage('DNS Assignment') {
             steps {
                 echo 'Testing Java App...'
                 sh 'testrepo/update-public-ip-dns.sh eureka1 eurekatest-vincent eureka1svc'
 
                 echo 'Assignment complete'
             }
-        }*/
+        }
     }
 }
