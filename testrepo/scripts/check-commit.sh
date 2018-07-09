@@ -13,7 +13,7 @@ if [[ -z ${current_time} ]]; then
  exit 1
 fi
 
-commit_hash="$(git log ./docker/dummy.txt | awk 'NR==1{print $2}')"
+commit_hash="$(git log ./testrepo/docker/dummy.txt | awk 'NR==1{print $2}')"
 commit_time="$(git show -s --format=%ct ${commit_hash})"
 timediff=`expr $current_time - $commit_time`
 
