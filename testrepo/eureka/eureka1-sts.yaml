@@ -2,7 +2,7 @@ apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: eureka1-sts
-  namespace: eurekatest-vincent #cse-platform-viji
+  namespace: eurekatest-vincent
   labels:
     name: eureka1-sts
 spec:

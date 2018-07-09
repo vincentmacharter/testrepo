@@ -48,6 +48,14 @@ fi
 
 serviceIP=$(echo ${service} | jq -r '.status.loadBalancer.ingress[0].ip')
 
+# Check if the IP has already been set for the service
+
+if [[ ${serviceIP} == "null" ]]; then
+    >&2 echo "FAIL: the public IP has not been set yet for the service"
+    exit 1
+fi
+
+
 # Get the corresponding public IP from Azure
 
 if ! publicIP=$(az network public-ip list | jq ".[] | select(.ipAddress == \"${serviceIP}\")"); then
