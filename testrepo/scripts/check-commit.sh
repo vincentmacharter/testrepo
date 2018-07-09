@@ -15,7 +15,7 @@ fi
 
 commit_hash="$(git log ./testrepo/docker/dummy.txt | awk 'NR==1{print $2}')"
 commit_time="$(git show -s --format=%ct ${commit_hash})"
-timediff=`expr $current_time - $commit_time`
+timediff=$(($current_time - $commit_time))
 
 if [[ timediff -lt 300 ]]; then
     echo "Build this thing"
